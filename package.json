@@ -1,11 +1,11 @@
 {
   "name": "@agiterra/knowledge-indexer-claude-code",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Auto-indexes knowledge vault files on write. Manages a Haiku sidecar for keyword generation, vector embedding, and semantic indexing.",
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "@agiterra/knowledge-indexer-tools": "git+ssh://git@github.com/agiterra/knowledge-indexer-tools.git#v0.1.0"
+    "@agiterra/knowledge-indexer-tools": "git+ssh://git@github.com/agiterra/knowledge-indexer-tools.git#fac973b"
   },
   "devDependencies": {
     "@types/bun": "latest"

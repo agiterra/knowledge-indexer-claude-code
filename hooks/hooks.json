@@ -11,18 +11,6 @@
           }
         ]
       }
-    ],
-    "SessionEnd": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bun run \"${CLAUDE_PLUGIN_ROOT}/hooks/session-end.ts\"",
-            "timeout": 10000
-          }
-        ]
-      }
     ]
   }
 }

@@ -1,17 +1,9 @@
 /**
- * SessionEnd hook: clean up the indexer sidecar on graceful exit.
+ * SessionEnd hook: no-op.
+ *
+ * Sidecars are per-project and shared by all agents. They clean themselves
+ * up via idle timeout (1 hour). Individual agent exits don't stop the sidecar.
  */
 
-import { stop } from "@agiterra/knowledge-indexer-tools";
-
-async function main() {
-  try {
-    await stop();
-    console.log("[kx] sidecar stopped");
-  } catch (e) {
-    console.error(`[kx] cleanup error: ${e}`);
-  }
-  process.exit(0);
-}
-
-main();
+// Intentionally empty — sidecar lifecycle is not tied to any single agent.
+process.exit(0);

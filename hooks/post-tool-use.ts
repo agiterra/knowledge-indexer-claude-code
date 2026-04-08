@@ -54,15 +54,15 @@ async function main() {
 
   await enqueue(cwd, rel);
 
-  const alive = await isAlive();
+  const alive = await isAlive(cwd);
   if (!alive) {
     await launch(cwd);
     setTimeout(async () => {
-      try { await poke(); } catch { /* sidecar may still be starting */ }
+      try { await poke(cwd); } catch { /* sidecar may still be starting */ }
     }, 5000);
     console.log(`[kx] sidecar launched, queued: ${rel}`);
   } else {
-    await poke();
+    await poke(cwd);
     console.log(`[kx] queued: ${rel}`);
   }
 
