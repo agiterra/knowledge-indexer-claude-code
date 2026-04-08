@@ -1,0 +1,14 @@
+{
+  "name": "knowledge-indexer",
+  "version": "0.1.0",
+  "description": "Auto-indexes knowledge vault files on write. Haiku sidecar for keyword generation + vector embedding.",
+  "author": {
+    "name": "Tim Garthwaite",
+    "url": "https://github.com/mividtim"
+  },
+  "license": "MIT",
+  "keywords": ["knowledge", "indexing", "auto-index", "sidecar", "haiku"],
+  "skills": "./skills/",
+  "postInstall": "bun install",
+  "postUpdate": "bun install"
+}

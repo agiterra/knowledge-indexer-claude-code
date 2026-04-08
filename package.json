@@ -1,0 +1,20 @@
+{
+  "name": "@agiterra/knowledge-indexer-claude-code",
+  "version": "0.1.0",
+  "description": "Auto-indexes knowledge vault files on write. Manages a Haiku sidecar for keyword generation, vector embedding, and semantic indexing.",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@agiterra/knowledge-tools": "agiterra/knowledge-tools#v0.2.1",
+    "@agiterra/crew-tools": "agiterra/crew-tools"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "files": [
+    "hooks/",
+    "skills/",
+    ".claude-plugin/"
+  ],
+  "author": "Tim Garthwaite <https://github.com/mividtim>"
+}
