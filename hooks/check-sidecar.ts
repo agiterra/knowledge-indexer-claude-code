@@ -4,7 +4,7 @@
  * Usage: bun run check-sidecar.ts <status|start|stop>
  */
 
-import { isAlive, healthCheck, launch, stop } from "./sidecar.js";
+import { isAlive, healthCheck, launch, stop } from "@agiterra/knowledge-indexer-tools";
 
 const command = process.argv[2];
 
