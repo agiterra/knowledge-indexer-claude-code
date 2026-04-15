@@ -1,6 +1,6 @@
 {
   "name": "knowledge-indexer",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Auto-indexes knowledge vault files on write. Haiku sidecar for keyword generation + vector embedding.",
   "author": {
     "name": "Tim Garthwaite",
