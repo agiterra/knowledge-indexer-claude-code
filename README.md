@@ -17,6 +17,10 @@ Auto-indexes knowledge vault files on write — spawns a Haiku sidecar for keywo
 
 No MCP tools or skills exposed. The indexer runs as a background process triggered by file write hooks. It watches the `.knowledge/` vault and automatically updates the keyword and vector indexes whenever vault files change.
 
+### What gets indexed
+
+Markdown vault files (`.knowledge/**/*.md`) trigger the indexer on write. The journal database (`.knowledge/journal.db`) does **not** — journal appends are high-frequency and would thrash the sidecar. Run `knowledge:journal` operations and the journal SQL backup updates on its own; vault searches across journal entries continue to work via the journal's own SQLite FTS5 index.
+
 ## Configuration
 
 | Var | Default | Description |
