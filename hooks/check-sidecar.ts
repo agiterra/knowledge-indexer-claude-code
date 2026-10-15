@@ -23,6 +23,13 @@ async function main() {
     }
 
     case "start": {
+      // launch() returns without spawning when a sidecar is already live. Say
+      // so: "launched" over a process that was never replaced hid a failed
+      // restart (2026-10-15).
+      if (await isAlive(cwd)) {
+        console.log("kx sidecar: already running (nothing launched)");
+        break;
+      }
       await launch(cwd);
       console.log("kx sidecar: launched");
       break;
