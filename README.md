@@ -70,6 +70,8 @@ The journal DB (`.knowledge/journal.db`) is intentionally NOT watched — journa
 - **One per project directory**, shared by all agents working in that repo (keyed by a hash of the project dir, not by agent ID).
 - **Lazy start** on the first watched write; reused if already running and responsive; replaced if found unresponsive (health check via `ping`).
 - **Self-reaps after ~1 hour idle.** Individual agent exits do NOT stop the sidecar — its `SessionEnd` behavior is intentionally a no-op.
+- **No Wire identity (since v1.2.9).** The launcher sets `AGENT_PRIVATE_KEY=""`, so the sidecar's wire MCP server exits at startup and nothing registers `kx-<hash>` on the Wire. Pokes and health pings go through the sidecar's screen session, not the Wire. crew-tools skips its Wire checks for this explicit blank. Do not give a sidecar a Wire identity (Brioche, 2026-10-16).
+- **Accepted limit: the persona's `~/.zshenv` still exports the key.** The blank covers the sidecar's process env and its MCP servers. Its Bash tool shells source `~/.zshenv` and can see the key again. This is not changed on purpose (Brioche, 2026-10-16): the sidecar runs as the persona's uid, so it can read the key's source file anyway. Removing the export gives no real isolation and can break the persona's own Wire. Real isolation needs a separate uid per sidecar, which is not planned now.
 
 ## Reference
 
