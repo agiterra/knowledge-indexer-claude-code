@@ -3,7 +3,8 @@
  *
  * Detects Write/Edit to watched directories (vault + extra_dirs from config),
  * appends the path to the indexing queue, and pokes the Haiku sidecar.
- * Launches the sidecar on first trigger if not already running.
+ * Launches the sidecar on first trigger if not already running, and relaunches
+ * it once its context passes the ceiling (a busy vault never reaches the idle exit).
  *
  * Stdin: { tool_name, tool_input: { file_path }, cwd, ... }
  * Stdout: brief status line (shown to user)
@@ -15,6 +16,7 @@ import {
   isAlive,
   launch,
   poke,
+  recycleIfOverCeiling,
   loadWatchedDirs,
   isWatched,
 } from "@agiterra/knowledge-indexer-tools";
@@ -62,8 +64,13 @@ async function main() {
     }, 5000);
     console.log(`[kx] sidecar launched, queued: ${rel}`);
   } else {
-    await poke(cwd);
-    console.log(`[kx] queued: ${rel}`);
+    const recycledAt = await recycleIfOverCeiling(cwd);
+    if (recycledAt !== null) {
+      console.log(`[kx] sidecar relaunched at ${recycledAt} context tokens, queued: ${rel}`);
+    } else {
+      await poke(cwd);
+      console.log(`[kx] queued: ${rel}`);
+    }
   }
 
   process.exit(0);
